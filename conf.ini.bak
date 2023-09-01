@@ -30,9 +30,6 @@ mode = post
 # 该配置会影响folderize中的作品文件夹命名
 naming = {create}_{desc}
 
-##是否启用文件名短名字(true|false)
-short_name = false
-
 # 作品、收藏、历史、好友、推荐等需要登录后的cookie
 # 置空程序会自动扫码获取cookie
 cookie = 

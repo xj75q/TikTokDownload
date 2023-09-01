@@ -45,15 +45,15 @@ class Config:
             self.cf: 配置文件对象
         """
 
-        if Util.os.path.isfile("conf.ini") == True:
+        if Util.os.path.isfile("conf_self.ini") == True:
             # 用utf-8防止出错
-            self.cf = Util.ConfigObj('conf.ini', encoding='utf-8')
+            self.cf = Util.ConfigObj('conf_self.ini', encoding='utf-8')
         else:
             Util.progress.console.print('[  提示  ]:没有检测到配置文件，生成中!\r')
             Util.log.info('[  提示  ]:没有检测到配置文件，生成中!')
             try:
                 # 实例化读取配置文件
-                self.cf = Util.ConfigObj('conf.ini', encoding='utf-8')
+                self.cf = Util.ConfigObj('conf_self.ini', encoding='utf-8')
                 # 往配置文件写入内容
                 self.cf['uid'] = 'https://v.douyin.com/JcjJ5Tq/'
                 # 添加注释
@@ -112,7 +112,7 @@ class Config:
                                             '不宜设置过大，如遇错误可适当降低']
 
                 # 写入到文件
-                self.cf.filename = 'conf.ini'
+                self.cf.filename = 'conf_self.ini'
                 self.cf.write()
                 Util.progress.console.print('[  配置  ]:配置文件生成成功!\r')
                 Util.log.info('[  配置  ]:配置文件生成成功!')
@@ -142,8 +142,8 @@ class Config:
             Util.progress.console.print('[  提示  ]:从GitHub为您下载配置文件!\r')
             Util.log.info('[  提示  ]:从GitHub为您下载配置文件!')
             r = Util.requests.get(
-                'https://cdn.jsdelivr.net/gh/Johnserf-Seed/TikTokDownload@main/conf.ini')
-            with open("conf.ini", "w") as f:
+                'https://cdn.jsdelivr.net/gh/Johnserf-Seed/TikTokDownload@main/conf_self.ini')
+            with open("conf_self.ini", "w") as f:
                 f.write(r.content)
             Util.progress.console.print('[  提示  ]:下载配置成功!\r')
             Util.log.info('[  提示  ]:下载配置成功!')
@@ -153,12 +153,12 @@ class Config:
             Util.log.error(iniError)
 
     def save(self, cookie) -> None:
-        if Util.os.path.isfile("conf.ini") == True:
+        if Util.os.path.isfile("conf_self.ini") == True:
             # 用utf-8防止出错
-            self.cf = Util.ConfigObj('conf.ini', encoding='utf-8')
+            self.cf = Util.ConfigObj('conf_self.ini', encoding='utf-8')
             self.cf['cookie'] = cookie
             # 写入到文件
-            self.cf.filename = 'conf.ini'
+            self.cf.filename = 'conf_self.ini'
             self.cf.write()
             Util.progress.console.print('[  配置  ]:cookie更新成功!\r')
             Util.log.info('[  配置  ]:cookie更新成功!')

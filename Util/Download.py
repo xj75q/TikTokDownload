@@ -49,6 +49,17 @@ class Download:
         else:
             return filename
 
+        def short_name(self,aweme,shortname):
+        if shortname == "true" :
+            nick_name = aweme.get("nickname")
+            if len(nick_name) > 4:
+                short_name = nick_name[0:4] + "_" + aweme.get("desc")[0:8]
+            else:
+                short_name = nick_name + "_" + aweme.get("desc")[0:8]
+            desc_dict = dict(desc=short_name)
+            aweme.update(desc_dict)
+        return aweme
+
     async def download_file(self, task_id: Util.TaskID, url: str, path: str) -> None:
         """
         下载指定 URL 的文件并将其保存在本地路径。
@@ -205,6 +216,8 @@ class Download:
             if Util.done_event.is_set():
                 Util.progress.console.print("[  提示  ]: 中断该页下载")
                 return
+            
+            aweme = self.short_name(aweme,self.config['short_name'])
 
             # 获取文件的基础路径，这里的aweme['path']是到用户目录的绝对路径
             base_path = aweme['path']
